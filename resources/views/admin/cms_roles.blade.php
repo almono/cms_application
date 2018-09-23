@@ -4,7 +4,7 @@
     <div class="col-xs-12 padding_fix" style="padding-top: 15px; position: relative;">
         <a class="btn btn-new" id="new_role_add" style="float: right;"><i class="fa fa-plus" style="padding-right: 5px;"></i>Add new role</a>
         <div class="col-xs-12 col-sm-4 col-md-2 new_user_div" id="new_role_div">
-            {!! Form::open(array('url' => 'roles','method' => 'POST')) !!}
+            {!! Form::open(array('route' => 'roles.store')) !!}
             {!! Form::token() !!}
             <div class="form-row">
                 <div class="form-group col-md-12">
@@ -42,9 +42,6 @@
         </div>
         @foreach($roles as $r)
             <div class="col-xs-12 padding_fix text-center" style="color: white; padding-top: 10px; padding-bottom: 10px;">
-                {!! Form::open(['url' => 'foo/bar']) !!}
-                {!! Form::hidden('role_id',$r->id) !!}
-                {!! Form::token() !!}
                 <div class="col-xs-12 col-md-2 padding_fix">
                     {{ $r->title }}
                 </div>
@@ -60,11 +57,10 @@
                     {{ $r->created_at }}
                 </div>
                 <div class="col-xs-12 col-md-1 padding_fix">
-                    <a href="{{ url('roles/' . $r->id) }}">
+                    <a href="{{ route('roles.show', $r->id) }}">
                         <i class="fa fa-edit" style="font-size: 18px; color: lightgreen;"></i>
                     </a>
                 </div>
-                {!! Form::close() !!}
             </div>
         @endforeach
     </div>

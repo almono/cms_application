@@ -13,7 +13,7 @@ class HomeController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth');
+        $this->middleware('auth', ['except' => ['index']] );
     }
 
     /**
@@ -22,6 +22,11 @@ class HomeController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
+    {
+        return view('front.home');
+    }
+
+    public function panel()
     {
         return view('admin.cms_welcome');
     }

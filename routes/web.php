@@ -14,24 +14,28 @@
 
 Auth::routes();
 
+Route::get('/admin/logout', ['uses' => 'UserController@admin_logout', 'as' => 'admin_logout']);
+
 Route::get('/', 'HomeController@index')->name('home');
+Route::get('/admin', 'HomeController@panel')->name('admin');
 
 
 //Panel routes
-Route::resources([
-    'users' => 'UserController',
-    'abilities' => 'AbilityController',
-    'roles' => 'RoleController'
-]);
+Route::group(['prefix' => 'admin'], function() {
+    Route::resource('users','Panel\UserController');
+    Route::resource('abilities','Panel\AbilityController');
+    Route::resource('roles','Panel\RoleController');
+});
 
 
-Route::post('/change_active_user', 'UserController@changeActive');
-Route::post('/change_admin_user', 'UserController@changeAdmin');
-Route::post('/assign_new_role', ['uses' => 'UserController@assignrole','as' => 'assign_new_role']);
-Route::post('/remove_role/{user}/{role_name}', ['uses' => 'UserController@removeRole','as' => 'remove_role']);
 
-Route::post('/change_active_role', 'RoleController@changeActive');
-Route::post('/assign_new_ability', ['uses' => 'RoleController@assignAbility','as' => 'assign_new_ability']);
-Route::post('/remove_ability/{role_name}/{ability_id}', ['uses' => 'RoleController@removeAbility','as' => 'remove_ability']);
+Route::post('/admin/change_active_user', 'Panel\UserController@changeActive');
+Route::post('/admin/change_admin_user', 'Panel\UserController@changeAdmin');
+Route::post('/admin/assign_new_role', ['uses' => 'Panel\UserController@assignrole','as' => 'assign_new_role']);
+Route::post('/admin/remove_role/{user}/{role_name}', ['uses' => 'Panel\UserController@removeRole','as' => 'remove_role']);
 
-Route::post('/change_active_ability', 'AbilityController@changeActive');
+Route::post('/admin/change_active_role', 'Panel\RoleController@changeActive');
+Route::post('/admin/assign_new_ability', ['uses' => 'Panel\RoleController@assignAbility','as' => 'assign_new_ability']);
+Route::post('/admin/remove_ability/{role_name}/{ability_id}', ['uses' => 'Panel\RoleController@removeAbility','as' => 'remove_ability']);
+
+Route::post('/admin/change_active_ability', 'Panel\AbilityController@changeActive');

@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Panel;
 
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Role;
 use App\Ability;
@@ -22,7 +23,7 @@ class RoleController extends Controller
         }
         else {
             flash()->error("You don't have permission to view roles!");
-            return back();
+            return redirect()->route('admin');
         }
 
     }
@@ -56,6 +57,7 @@ class RoleController extends Controller
         }
         else {
             flash()->error("You don't have permission to create new role!");
+            return redirect()->route('admin');
         }
 
         return back();
@@ -80,7 +82,7 @@ class RoleController extends Controller
         }
         else {
             flash()->error("You don't have permission to edit roles!");
-            return back();
+            return redirect()->route('admin');
         }
 
     }
@@ -182,6 +184,7 @@ class RoleController extends Controller
         }
         else {
             flash()->error("You don't have permission to remove abilities!");
+            return redirect()->route('admin');
         }
 
         return back();

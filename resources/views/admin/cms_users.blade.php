@@ -4,7 +4,7 @@
     <div class="col-xs-12 padding_fix" style="padding-top: 15px; position: relative;">
         <a class="btn btn-new" id="new_user_add" style="float: right;"><i class="fa fa-plus" style="padding-right: 5px;"></i>Add new user</a>
         <div class="col-xs-12 col-sm-4 col-md-2 new_user_div" id="new_user_div">
-            {!! Form::open(array('url' => 'users','method' => 'POST')) !!}
+            {!! Form::open(array('route' => 'users.store')) !!}
             {!! Form::token() !!}
             <div class="form-row">
                 <div class="form-group col-md-12">
@@ -103,7 +103,7 @@
                     {{ $u->created_at }}
                 </div>
                 <div class="col-xs-12 col-md-1 padding_fix">
-                    <a href="{{ url('users/' . $u->id) }}">
+                    <a href="{{ route('users.show', $u->id) }}">
                         <i class="fa fa-edit" style="font-size: 18px; color: lightgreen;"></i>
                     </a>
                 </div>

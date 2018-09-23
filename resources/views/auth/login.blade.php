@@ -1,7 +1,8 @@
 @extends('admin.admin')
 
 @section('admin-content')
-<div class="container">
+@include('admin.cms_admin_content_top')
+<div class="container" style="margin-top: 20px;">
     <div class="row justify-content-center">
         <div class="col-md-12">
             <div class="card">

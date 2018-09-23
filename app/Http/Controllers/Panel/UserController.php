@@ -1,13 +1,15 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Panel;
 
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 use App\User;
 use App\Role;
-use App\Permission;
+
 use Bouncer;
+use Auth;
 
 class UserController extends Controller
 {
@@ -24,7 +26,7 @@ class UserController extends Controller
         }
         else {
             flash()->error("You don't have permission to view users!");
-            return back();
+            return redirect()->route('admin');
         }
 
     }
@@ -52,6 +54,7 @@ class UserController extends Controller
         }
         else {
             flash()->error("You don't have permission to create new user!");
+            return redirect()->route('admin');
         }
 
         return back();
@@ -77,7 +80,7 @@ class UserController extends Controller
         }
         else {
             flash()->error("You don't have permission to edit users!");
-            return back();
+            return redirect()->route('admin');
         }
     }
 
@@ -113,6 +116,12 @@ class UserController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function admin_logout() {
+        Auth::logout();
+        flash()->info('You have been logged out!');
+        return redirect()->route('admin');
     }
 
     public function changeActive(Request $request)
@@ -191,6 +200,7 @@ class UserController extends Controller
         }
         else {
             flash()->error("You don't have permission to manage user roles!");
+            return redirect()->route('admin');
         }
 
         return back();
@@ -212,6 +222,7 @@ class UserController extends Controller
         }
         else {
             flash()->error("You don't have permission to manage user roles!");
+            return redirect()->route('admin');
         }
 
         return back();

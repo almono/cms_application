@@ -18,19 +18,19 @@
             User info
         </li>
         <li class="active">
-            <a href="{{ route('home') }}">Home</a>
+            <a href="{{ route('admin') }}">Home</a>
         </li>
         <li>
             <a href="#pageSubmenu2" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Models management</a>
             <ul class="collapse list-unstyled" id="pageSubmenu2">
                 <li>
-                    <a href="{{ url('/users') }}">Users</a>
+                    <a href="{{ route('users.index') }}">Users</a>
                 </li>
                 <li>
-                    <a href="{{ url('/roles') }}">Roles</a>
+                    <a href="{{ route('roles.index') }}">Roles</a>
                 </li>
                 <li>
-                    <a href="{{ url('/abilities') }}">Abilities</a>
+                    <a href="{{ route('abilities.index') }}">Abilities</a>
                 </li>
             </ul>
         </li>
@@ -52,7 +52,7 @@
             <a href="#">Portfolio</a>
         </li>
         <li>
-            <a href="#">Log out</a>
+            <a href="{{ route('admin_logout') }}">Log out</a>
         </li>
     @endif
 </ul>

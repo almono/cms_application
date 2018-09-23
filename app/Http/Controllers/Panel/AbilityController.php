@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Panel;
 
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Ability;
 use Bouncer;
@@ -15,13 +16,13 @@ class AbilityController extends Controller
      */
     public function index()
     {
-        if (Bouncer::can('view-roles')) {
+        if (Bouncer::can('view-abilities')) {
             $abilities = Ability::paginate(20);
             return view('admin.cms_abilities', compact(['abilities']));
         }
         else {
             flash()->error("You don't have permission to view abilities!");
-            return back();
+            return redirect()->route('admin');
         }
 
     }
@@ -55,6 +56,7 @@ class AbilityController extends Controller
         }
         else {
             flash()->error("You don't have permission to create new ability!");
+            return redirect()->route('admin');
         }
 
         return back();
@@ -107,7 +109,7 @@ class AbilityController extends Controller
 
     public function changeActive(Request $request)
     {
-        if (Bouncer::can('manage-roles')) {
+        if (Bouncer::can('manage-abilities')) {
             $id = $request->get('id');
             $role = Ability::findOrFail($id);
 
