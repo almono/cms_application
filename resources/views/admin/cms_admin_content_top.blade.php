@@ -1,3 +1,4 @@
-<div class="col-xs-12 users-top text-center" style="display: flex; align-items: center;">
+@if (session()->has("flash_notification"))
     @include('flash::message')
-</div>
+@endif
+

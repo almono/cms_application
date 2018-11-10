@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Role;
 use App\Ability;
 use Bouncer;
+use Auth;
 
 class RoleController extends Controller
 {
@@ -17,7 +18,7 @@ class RoleController extends Controller
      */
     public function index()
     {
-        if (Bouncer::can('view-roles')) {
+        if (Bouncer::can('view-roles') || Auth::user()->super_admin == '1') {
             $roles = Role::paginate(20);
             return view('admin.cms_roles', compact(['roles']));
         }
@@ -46,7 +47,7 @@ class RoleController extends Controller
      */
     public function store(Request $request)
     {
-        if (Bouncer::can('create-roles')) {
+        if (Bouncer::can('create-roles') || Auth::user()->super_admin == '1') {
             if(isset($request['role_name']) && $request['role_name'] != '')
             {
                 $role = Bouncer::role()->firstOrCreate([
@@ -72,7 +73,7 @@ class RoleController extends Controller
      */
     public function show($id)
     {
-        if (Bouncer::can('edit-roles')) {
+        if (Bouncer::can('edit-roles') || Auth::user()->super_admin == '1') {
             $role = Role::findOrFail($id);
 
             $role_abilities = \DB::table('permissions')->select('ability_id')->where('entity_id',$id)->where('entity_type','roles');
@@ -118,12 +119,21 @@ class RoleController extends Controller
      */
     public function destroy($id)
     {
-        //
+        try {
+            $role = Role::findOrFail($id);
+            $role->delete();
+            flash()->success('Role has been removed');
+        }
+        catch (Exception $e) {
+            flash()->error("Role couldn't be removed");
+        }
+
+        return back();
     }
 
     public function changeActive(Request $request)
     {
-        if (Bouncer::can('manage-roles')) {
+        if (Bouncer::can('manage-roles') || Auth::user()->super_admin == '1') {
             $id = $request->get('id');
             $role = Role::findOrFail($id);
 
@@ -145,14 +155,14 @@ class RoleController extends Controller
             return "State has been changed";
         }
         else {
-            return false;
+            return "You don't have permission to do that!";
         }
 
     }
 
     public function assignAbility(Request $request)
     {
-        if (Bouncer::can('manage-role-abilities')) {
+        if (Bouncer::can('manage-role-abilities') || Auth::user()->super_admin == '1') {
             $params = $request->all();
 
             try {
@@ -173,7 +183,7 @@ class RoleController extends Controller
 
     public function removeAbility($role_name, $ability_id)
     {
-        if (Bouncer::can('manage-role-abilities')) {
+        if (Bouncer::can('manage-role-abilities') || Auth::user()->super_admin == '1') {
             try {
                 Bouncer::disallow($role_name)->to($ability_id);
                 flash()->success('You have removed ability from this role!');

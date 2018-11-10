@@ -1,8 +1,9 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Panel;
 
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
 class HomeController extends Controller
 {
@@ -23,7 +24,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('front.home');
+        return view('admin.cms_welcome');
     }
 
     public function panel()

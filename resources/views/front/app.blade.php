@@ -22,18 +22,19 @@
     <script type="text/javascript" src="{{URL::asset('js/main.js')}}"></script>
     <script type="text/javascript" src="{{URL::asset('js/select2.min.js')}}"></script>
 
-    <title>almono's CMS application</title>
+    <title>almono's CMS application Front</title>
 </head>
 
 <body style="background: #464646">
-    <div class="wrapper">
-        <div class="col-md-12">
-            WELCOME
-        </div>
-        <div id="content">
-            @yield('content')
-        </div>
+    <div class="container-fluid">
+        @include('admin.sidebar')
     </div>
+    <div id="content">
+        @yield('front-content')
+    </div>
+    <footer>
+        @include('front.footer')
+    </footer>
 </body>
 </html>
 

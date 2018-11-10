@@ -14,17 +14,18 @@
 
 Auth::routes();
 
-Route::get('/admin/logout', ['uses' => 'UserController@admin_logout', 'as' => 'admin_logout']);
+Route::get('/admin/logout', ['uses' => 'Panel\UserController@admin_logout', 'as' => 'admin_logout']);
 
-Route::get('/', 'HomeController@index')->name('home');
-Route::get('/admin', 'HomeController@panel')->name('admin');
-
+Route::get('/', 'Front\HomeController@index')->name('home');
+Route::get('/admin', 'Panel\HomeController@panel')->name('admin');
 
 //Panel routes
 Route::group(['prefix' => 'admin'], function() {
     Route::resource('users','Panel\UserController');
     Route::resource('abilities','Panel\AbilityController');
     Route::resource('roles','Panel\RoleController');
+    Route::resource('menu','Panel\MenuController');
+    Route::resource('pages','Panel\PageController');
 });
 
 
@@ -39,3 +40,7 @@ Route::post('/admin/assign_new_ability', ['uses' => 'Panel\RoleController@assign
 Route::post('/admin/remove_ability/{role_name}/{ability_id}', ['uses' => 'Panel\RoleController@removeAbility','as' => 'remove_ability']);
 
 Route::post('/admin/change_active_ability', 'Panel\AbilityController@changeActive');
+
+Route::post('/admin/change_active_menu', 'Panel\MenuController@changeActive');
+
+Route::get('/admin/new_age', ['uses' => 'Panel\PageController@newPage', 'as' => 'new_page_form']);

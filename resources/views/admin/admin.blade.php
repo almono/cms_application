@@ -21,6 +21,8 @@
     <script type="text/javascript" src="{{URL::asset('js/bootstrap.min.js')}}"></script>
     <script type="text/javascript" src="{{URL::asset('js/main.js')}}"></script>
     <script type="text/javascript" src="{{URL::asset('js/select2.min.js')}}"></script>
+    <link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote.css" rel="stylesheet">
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote.js"></script>
 
     <title>almono's CMS application</title>
 </head>

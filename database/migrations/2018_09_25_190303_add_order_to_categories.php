@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddColumnsToUsersTable extends Migration
+class AddOrderToCategories extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,8 @@ class AddColumnsToUsersTable extends Migration
      */
     public function up()
     {
-        Schema::table('users', function (Blueprint $table) {
-            $table->enum('super_admin',['0','1'])->default('0')->after('password');
+        Schema::table('menu', function (Blueprint $table) {
+            $table->integer('order')->length(10)->default(0)->after('menu_slug');
         });
     }
 
@@ -25,8 +25,8 @@ class AddColumnsToUsersTable extends Migration
      */
     public function down()
     {
-        Schema::table('users', function (Blueprint $table) {
-            $table->dropColumn('super_admin');
+        Schema::table('menu', function (Blueprint $table) {
+            $table->dropColumn('order');
         });
     }
 }

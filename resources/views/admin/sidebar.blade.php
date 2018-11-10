@@ -9,13 +9,14 @@
 </nav>
 <?php //TOGGLE BUTTON END ?>
 
-<div class="sidebar-header">
+<div class="sidebar-header text-center">
     <h3>almono's CMS application</h3>
 </div>
 <ul class="list-unstyled components">
     @if(Auth::check())
         <li class="text-center" style="height: 150px; padding: 10px;">
-            User info
+            Logged as: <br>
+            {{ Auth::user()->username }}
         </li>
         <li class="active">
             <a href="{{ route('admin') }}">Home</a>
@@ -35,21 +36,27 @@
             </ul>
         </li>
         <li>
-            <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Pages</a>
+            <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Content management</a>
             <ul class="collapse list-unstyled" id="pageSubmenu">
                 <li>
-                    <a href="#">Page 1</a>
+                    <a href="{{ route('menu.index') }}">Menu</a>
                 </li>
                 <li>
-                    <a href="#">Page 2</a>
+                    <a href="{{ route('pages.index') }}">Pages</a>
                 </li>
                 <li>
-                    <a href="#">Page 3</a>
+                    <a href="#">Website layout</a>
                 </li>
             </ul>
         </li>
         <li>
-            <a href="#">Portfolio</a>
+            <a href="#">Slider</a>
+        </li>
+        <li>
+            <a href="#">SEO</a>
+        </li>
+        <li>
+            <a href="#">Settings</a>
         </li>
         <li>
             <a href="{{ route('admin_logout') }}">Log out</a>

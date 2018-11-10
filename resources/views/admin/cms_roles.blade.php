@@ -39,6 +39,9 @@
             <div class="col-xs-12 col-sm-12 col-md-1 text-center" style="color: white; line-height: 30px;">
                 <span>Edit</span>
             </div>
+            <div class="col-xs-12 col-sm-12 col-md-1 text-center" style="color: white; line-height: 30px;">
+                <span>Delete</span>
+            </div>
         </div>
         @foreach($roles as $r)
             <div class="col-xs-12 padding_fix text-center" style="color: white; padding-top: 10px; padding-bottom: 10px;">
@@ -60,6 +63,13 @@
                     <a href="{{ route('roles.show', $r->id) }}">
                         <i class="fa fa-edit" style="font-size: 18px; color: lightgreen;"></i>
                     </a>
+                </div>
+                <div class="col-xs-12 col-md-1 padding_fix">
+                    {!! Form::open(['route' => ['roles.destroy', $r->id], 'method' => 'delete', 'onsubmit' => 'return ConfirmDelete()']) !!}
+                    <button type="submit" style="background: transparent; border: none;">
+                        <i class="fa fa-times" style="font-size: 16px; color: red;"></i>
+                    </button>
+                    {!! Form::close() !!}
                 </div>
             </div>
         @endforeach
@@ -87,7 +97,16 @@
             $('#new_role_add').click( function() {
                 $('#new_role_div').toggle("fast");
             });
-        })
+        });
+
+        function ConfirmDelete()
+        {
+            var x = confirm("Are you sure you want to delete?");
+            if (x)
+                return true;
+            else
+                return false;
+        }
 
     </script>
 @stop

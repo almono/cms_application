@@ -245,6 +245,26 @@ a.article:hover {
     border-color: #222;
 }
 
+.note-editable {
+    min-height: 240px;
+    background: url("line_detail.png");
+    background-color: rgba(0, 0, 0, 0);
+    line-height: 20px;
+    padding: 0;
+    margin-top: 20px;
+    color: #858585;
+}
+
+.flex_display {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.page_descriptions > .note-editor {
+    margin-bottom: 0px;
+}
+
 @media (max-width: 768px) {
     #sidebar {
         margin-left: -250px;

@@ -20,7 +20,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        if (Bouncer::can('view-users')) {
+        if (Bouncer::can('view-users') || Auth::user()->super_admin == '1') {
             $users = User::paginate(20);
             return view('admin.cms_users', compact(['users']));
         }
@@ -49,7 +49,7 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        if (Bouncer::can('create-users')) {
+        if (Bouncer::can('create-users') || Auth::user()->super_admin == '1') {
             User::new_user($request);
         }
         else {
@@ -69,7 +69,7 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        if (Bouncer::can('edit-users')) {
+        if (Bouncer::can('edit-users') || Auth::user()->super_admin == '1') {
             $user = User::findOrFail($id);
             $user_abilities = $user->getAbilities();
 
@@ -126,7 +126,7 @@ class UserController extends Controller
 
     public function changeActive(Request $request)
     {
-        if (Bouncer::can('manager-users')) {
+        if (Bouncer::can('manager-users') || Auth::user()->super_admin == '1') {
             $id = $request->get('id');
             $user = User::findOrFail($id);
 
@@ -184,7 +184,7 @@ class UserController extends Controller
 
     public function assignRole(Request $request)
     {
-        if (Bouncer::can('manage-user-roles')) {
+        if (Bouncer::can('manage-user-roles') || Auth::user()->super_admin == '1') {
             $params = $request->all();
             $user = User::findOrFail($params['user_id']);
 
@@ -209,7 +209,7 @@ class UserController extends Controller
 
     public function removeRole($user, $role_name)
     {
-        if (Bouncer::can('manage-user-roles')) {
+        if (Bouncer::can('manage-user-roles') || Auth::user()->super_admin == '1') {
             try {
                 Bouncer::retract($role_name)->from($user);
             }
