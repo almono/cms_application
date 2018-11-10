@@ -43,36 +43,15 @@
                 <span>Delete</span>
             </div>
         </div>
-        @foreach($roles as $r)
-            <div class="col-xs-12 padding_fix text-center" style="color: white; padding-top: 10px; padding-bottom: 10px;">
-                <div class="col-xs-12 col-md-2 padding_fix">
-                    {{ $r->title }}
-                </div>
-                <div class="col-xs-12 col-md-1 padding_fix">
-                    <div class="pretty p-default p-thick p-pulse" style="margin-right: -5px;">
-                        <input type="checkbox" class="admin-checkbox is-active" name="is_active" id="{{$r->id}}" @if($r->active == '1') checked="checked"  @endif >
-                        <div class="state p-success-o">
-                            <label></label>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xs-12 col-md-1 padding_fix">
-                    {{ $r->created_at }}
-                </div>
-                <div class="col-xs-12 col-md-1 padding_fix">
-                    <a href="{{ route('roles.show', $r->id) }}">
-                        <i class="fa fa-edit" style="font-size: 18px; color: lightgreen;"></i>
-                    </a>
-                </div>
-                <div class="col-xs-12 col-md-1 padding_fix">
-                    {!! Form::open(['route' => ['roles.destroy', $r->id], 'method' => 'delete', 'onsubmit' => 'return ConfirmDelete()']) !!}
-                    <button type="submit" style="background: transparent; border: none;">
-                        <i class="fa fa-times" style="font-size: 16px; color: red;"></i>
-                    </button>
-                    {!! Form::close() !!}
-                </div>
+        @if(count($roles) > 0)
+            <div class="roles_list">
+                @include('admin.partials.cms_role_listing')
             </div>
-        @endforeach
+        @else
+            <div class="col-xs-12 padding_fix text-center" style="color: white; padding-top: 10px; padding-bottom: 10px;">
+                There are no roles to display
+            </div>
+        @endif
     </div>
 @stop
 @section('admin-scripts')
@@ -97,6 +76,28 @@
             $('#new_role_add').click( function() {
                 $('#new_role_div').toggle("fast");
             });
+        });
+
+        $(function() {
+            $('body').on('click', '.pagination a', function(e) {
+                e.preventDefault();
+
+                $('.roles_list a').css('color', '#1eb91e');
+
+                var url = $(this).attr('href');
+                getRoles(url);
+                window.history.pushState("", "", url); // sets url to current pagination href
+            });
+
+            function getRoles(url) {
+                $.ajax({
+                    url : url
+                }).done(function (data) {
+                    $('.roles_list').html(data);
+                }).fail(function () {
+                    alert('Users could not be loaded.');
+                });
+            }
         });
 
         function ConfirmDelete()

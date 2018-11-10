@@ -75,40 +75,15 @@
                 <span>Edit</span>
             </div>
         </div>
-        @foreach($users as $u)
-            <div class="col-xs-12 padding_fix text-center" style="color: white; padding-top: 10px; padding-bottom: 10px;">
-                <div class="col-xs-12 col-md-2 padding_fix">
-                    {{ $u->username }}
-                </div>
-                <div class="col-xs-12 col-md-2 padding_fix">
-                    {{ $u->email }}
-                </div>
-                <div class="col-xs-12 col-md-1 padding_fix">
-                    <div class="pretty p-default p-thick p-pulse" style="margin-right: -5px;">
-                        <input type="checkbox" class="admin-checkbox is-active" name="is_active" id="{{$u->id}}" @if($u->active == '1') checked="checked"  @endif >
-                        <div class="state p-success-o">
-                            <label></label>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xs-12 col-md-1 padding_fix">
-                    <div class="pretty p-default p-thick p-pulse" style="margin-right: -5px;">
-                        <input type="checkbox" class="admin-checkbox is-admin" name="is_admin" id="{{$u->id}}" @if($u->super_admin == '1') checked="checked" @endif >
-                        <div class="state p-success-o">
-                            <label></label>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xs-12 col-md-1 padding_fix">
-                    {{ $u->created_at }}
-                </div>
-                <div class="col-xs-12 col-md-1 padding_fix">
-                    <a href="{{ route('users.show', $u->id) }}">
-                        <i class="fa fa-edit" style="font-size: 18px; color: lightgreen;"></i>
-                    </a>
-                </div>
+        @if(count($users) > 0)
+            <div class="users_list">
+                @include('admin.partials.cms_user_listing')
             </div>
-        @endforeach
+        @else
+            <div class="col-xs-12 padding_fix text-center" style="color: white; padding-top: 10px; padding-bottom: 10px;">
+                There are no users to display
+            </div>
+        @endif
     </div>
 @stop
 @section('admin-scripts')
@@ -142,6 +117,28 @@
             success: function(data){
             }
         });
+    });
+
+    $(function() {
+        $('body').on('click', '.pagination a', function(e) {
+            e.preventDefault();
+
+            $('.users_list a').css('color', '#1eb91e');
+
+            var url = $(this).attr('href');
+            getUsers(url);
+            window.history.pushState("", "", url); // sets url to current pagination href
+        });
+
+        function getUsers(url) {
+            $.ajax({
+                url : url
+            }).done(function (data) {
+                $('.users_list').html(data);
+            }).fail(function () {
+                alert('Users could not be loaded.');
+            });
+        }
     });
 
     $(document).ready( function() {
