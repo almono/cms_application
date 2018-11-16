@@ -19,6 +19,9 @@
                 <span>Created on</span>
             </div>
             <div class="col-xs-12 col-sm-12 col-md-1 text-center" style="color: white; line-height: 30px;">
+                <span>Edit</span>
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-1 text-center" style="color: white; line-height: 30px;">
                 <span>Delete</span>
             </div>
         </div>

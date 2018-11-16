@@ -154,6 +154,7 @@ return [
         Collective\Html\HtmlServiceProvider::class,
         Silber\Bouncer\BouncerServiceProvider::class,
         Nestable\NestableServiceProvider::class,
+        Intervention\Image\ImageServiceProvider::class,
 
         /*
          * Application Service Providers...
@@ -218,6 +219,9 @@ return [
         'Html' => Collective\Html\HtmlFacade::class,
         'Bouncer' => Silber\Bouncer\BouncerFacade::class,
         'Nestable' => Nestable\Facades\NestableService::class,
+        'Image' => Intervention\Image\Facades\Image::class,
+
+
 
     ],
 

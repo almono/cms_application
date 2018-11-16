@@ -3,12 +3,16 @@
 namespace App\Http\Controllers\Panel;
 
 use App\Http\Controllers\Controller;
-
-use App\Page;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
+use Mockery\Exception;
+use App\Page;
+use Image;
 use Bouncer;
 use Auth;
-use Mockery\Exception;
+use File;
+use Carbon\Carbon;
+
 
 class PageController extends Controller
 {
@@ -52,33 +56,44 @@ class PageController extends Controller
      */
     public function store(Request $request)
     {
+
         if (Bouncer::can('create-pages') || Auth::user()->super_admin == '1') {
             try {
-                if(isset($request['menu_name']) && $request['menu_name'] != '')
+                if(isset($request['page_title']) && $request['page_title'] != '')
                 {
-                    $menu = new Menu();
-                    $menu->menu_name = $request['menu_name'];
-                    $menu->menu_slug = str_slug($request['menu_name']);
-
-                }
-                if(isset($request['menu_parent']) && $request['menu_parent'] != '')
-                {
-                    $menu->parent_id = $request['menu_parent'];
-                }
-                else {
-                    $menu->parent_id = '0';
+                    $page = new Page();
+                    $page->page_title = $request['page_title'];
+                    $page->page_slug = str_slug($request['page_title']);
                 }
 
-                $menu->order = $request['menu_order'];
-                $menu->save();
+                $now = Carbon::now()->timestamp;
+                $page->page_image = str_slug($request['page_title']) . "-" . $now;
+
+                if ($request->hasFile('page_image')) {
+
+                    $img = Image::make($request
+                        ->file('page_image'))
+                        ->resize(600, 600, function ($c) {
+                            $c->aspectRatio();
+                        })
+                        ->resizeCanvas(600, 600)
+                        ->save('page_images/' . str_slug($request['page_title']) . "-" . $now . '.jpg', 75);
+
+                }
+
+                $page->description_1 = $request['page_desc1'];
+                $page->description_2 = $request['page_desc2'];
+                $page->seo_title = $request['seo'];
+                $page->seo_description = $request['seo_desc'];
+                $page->save();
             }
             catch (Exception $e) {
-                flash()->error("There has been a problem while creating new menu");
+                flash()->error("There has been a problem while creating a new page");
                 return back();
             }
         }
         else {
-            flash()->error("You don't have permission to create new menu item!");
+            flash()->error("You don't have permission to create new page!");
             return redirect()->route('admin');
         }
 
@@ -91,9 +106,10 @@ class PageController extends Controller
      * @param  \App\Page  $page
      * @return \Illuminate\Http\Response
      */
-    public function show(Page $page)
+    public function show($id)
     {
-        //
+        $page = Page::findOrFail($id);
+        return view('admin.cms_edit_page',compact('page'));
     }
 
     /**
@@ -116,7 +132,42 @@ class PageController extends Controller
      */
     public function update(Request $request, Page $page)
     {
-        //
+        $inputs = $request->all();
+
+        try {
+
+            $page->page_title = $inputs['page_title'];
+            $page->description_1 = $inputs['page_desc1'];
+            $page->description_2 = $inputs['page_desc2'];
+            $page->seo_title = $request['seo'];
+            $page->seo_description = $request['seo_desc'];
+
+            $now = Carbon::now()->timestamp;
+
+            if ($request->hasFile('page_image')) {
+
+                File::delete('page_images/' . $page->page_image . '.jpg' );
+                $page->page_image = str_slug($request['page_title']) . "-" . $now;
+
+                $img = Image::make($request
+                    ->file('page_image'))
+                    ->resize(600, 600, function ($c) {
+                        $c->aspectRatio();
+                    })
+                    ->resizeCanvas(600, 600)
+                    ->save('page_images/' . str_slug($request['page_title']) . "-" . $now .  '.jpg', 75);
+
+            }
+
+            $page->save();
+            flash()->success("Page has been updated");
+        }
+        catch(Exception $e) {
+            flash()->error("Page couldn't be updated");
+        }
+
+        return redirect()->route('pages.index');
+
     }
 
     /**

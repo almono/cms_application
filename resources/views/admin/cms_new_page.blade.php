@@ -6,11 +6,11 @@
             <div class="col-xs-12" style="padding: 20px 15px;">
                 <span style="font-size: 30px; font-weight: 600;">New page creator</span>
             </div>
-            <div class="col-xs-12 col-sm-4 col-md-4" style="padding-top: 20px;">
+            <div class="col-xs-12" style="padding-top: 20px;">
                 {!! Form::open(array('route' => 'pages.store', 'files' => 'true')) !!}
                 {!! Form::token() !!}
                 <div class="form-row">
-                    <div class="form-group col-md-12 flex_display padding_fix">
+                    <div class="form-group col-xs-12 col-sm-12 flex_display padding_fix">
                         @if ($errors->has('title'))
                             <div class="error" style="color: red; font-size: 12px;">
                                 {{ $errors->first('title') }}
@@ -20,23 +20,36 @@
                             <label class="new_user_label" for="inputTitle4">Title</label>
                         </div>
                         <div class="col-xs-10">
-                            <input type="text" class="form-control" id="inputTitle4" name="title" placeholder="Title" required>
+                            <input type="text" class="form-control" id="inputTitle4" name="page_title" placeholder="Title" required>
                         </div>
                     </div>
-                    <div class="form-group col-md-12 flex_display padding_fix">
+                    <div class="form-group col-xs-12 col-sm-12 flex_display padding_fix">
                         @if ($errors->has('seo'))
                             <div class="error" style="color: red; font-size: 12px;">
                                 {{ $errors->first('seo') }}
                             </div>
                         @endif
                             <div class="col-xs-2 padding_fix text-center">
-                                <label class="new_user_label" for="inputSeo4">SEO</label>
+                                <label class="new_user_label" for="inputSeo4">SEO title</label>
                             </div>
                             <div class="col-xs-10">
-                                <input type="text" class="form-control" id="inputSeo4" name="seo" placeholder="Description used for SEO">
+                                <input type="text" class="form-control" id="inputSeo4" name="seo" placeholder="Title used for SEO">
                             </div>
                     </div>
-                    <div class="form-group col-md-12 flex_display padding_fix">
+                    <div class="form-group col-xs-12 col-sm-12 flex_display padding_fix">
+                        @if ($errors->has('seo_desc'))
+                            <div class="error" style="color: red; font-size: 12px;">
+                                {{ $errors->first('seo_desc') }}
+                            </div>
+                        @endif
+                        <div class="col-xs-2 padding_fix text-center">
+                            <label class="new_user_label" for="inputSeo4">SEO description</label>
+                        </div>
+                        <div class="col-xs-10">
+                            <input type="text" class="form-control" id="inputSeo4" name="seo_desc" placeholder="Description used for SEO">
+                        </div>
+                    </div>
+                    <div class="form-group col-xs-12 col-md-12 flex_display padding_fix">
                         @if ($errors->has('page_image'))
                             <div class="error" style="color: red; font-size: 12px;">
                                 {{ $errors->first('page_image') }}
@@ -49,26 +62,29 @@
                             <input type="file" id="inputPageImage4" name="page_image">
                         </div>
                     </div>
-                </div>
-                <div class="form-row">
-                    <div class="form-group col-xs-12 text-center">
-                        <button class="btn btn-new" type="submit" value="Create new user">Create</button>
+                    <div class="form-row col-xs-12 col-sm-6">
+                        <div class="col-xs-12 col-sm-12" style="border: 1px solid rgb(34,34,34); padding: 5px; background: #464646; z-index: 501;">
+                            <span class="page1">Edit main description</span>
+                        </div>
+                        <textarea class="col-xs-12 col-sm-12 text-center page_desc1" name="page_desc1" required></textarea>
+                    </div>
+                    <div class="form-row col-xs-12 col-sm-6">
+                        <div class="col-xs-12 col-sm-12 page_desc2_open" style="border: 1px solid rgb(34,34,34); padding: 5px; background: #464646; z-index: 501;">
+                            <span class="page2">Edit additional description</span>
+                        </div>
+                    </div>
+                    <div class="form-row col-xs-12 col-sm-6">
+                        <textarea class="col-xs-12 col-sm-12 text-center page_desc2" name="page_desc2"></textarea>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-xs-12 text-center">
+                            <button class="btn btn-new" type="submit" value="Create new user">Create</button>
+                        </div>
                     </div>
                 </div>
-            </div>
-
-            <div class="col-md-8 page_descriptions" style="padding-top: 20px; margin-bottom: 20px;">
-                <div class="col-xs-12 page_desc1_open" style="border: 1px solid rgb(34,34,34); padding: 5px; background: #464646; z-index: 501;">
-                    <i class="fa fa-plus page_desc1_icon" style="padding-right: 5px;"></i><span class="page1">Edit main description</span>
-                </div>
-                <div class="col-xs-12 page_desc2_open" style="border: 1px solid rgb(34,34,34); padding: 5px; background: #464646; z-index: 501;">
-                    <i class="fa fa-plus page_desc2_icon" style="padding-right: 5px;"></i><span class="page2">Edit additional description</span>
-                </div>
-                <div class="col-xs-12 text-center page_desc1"></div>
-                <div class="col-xs-12 text-center page_desc2"></div>
+                {!! Form::close() !!}
             </div>
         </div>
-        {!! Form::close() !!}
     </div>
 @stop
 @section('admin-scripts')
@@ -82,29 +98,6 @@
             $('.page_desc2').summernote({
                 disableResizeEditor: true,
                 placeholder: 'Additional page description...'
-            });
-
-            $(".page_desc1").next(".note-editor").hide();
-            $(".page_desc2").next(".note-editor").hide();
-
-            $(".page_desc1_open").on('click', function() {
-                $(".page_desc1").next(".note-editor").slideToggle("smooth");
-                $(".page_desc2").next(".note-editor").slideUp("smooth");
-                $(".page_desc1_icon").toggleClass("fa-plus fa-minus");
-                $(".page_desc2_icon").removeClass("fa-minus");
-                $(".page_desc2_icon").addClass("fa-plus");
-                $(".page_desc1_open").css("color","red");
-                $(".page_desc2_open").css("color","white");
-            });
-
-            $(".page_desc2_open").on('click', function() {
-                $(".page_desc2").next(".note-editor").slideToggle("smooth");
-                $(".page_desc1").next(".note-editor").slideUp("smooth");
-                $(".page_desc2_icon").toggleClass("fa-plus fa-minus");
-                $(".page_desc1_icon").removeClass("fa-minus");
-                $(".page_desc1_icon").addClass("fa-plus");
-                $(".page_desc2_open").css("color","red");
-                $(".page_desc1_open").css("color","white");
             });
 
         })

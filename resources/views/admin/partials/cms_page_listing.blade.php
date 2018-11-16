@@ -4,7 +4,7 @@
             {{ $p->id }}
         </div>
         <div class="col-xs-12 col-md-2 padding_fix">
-            {{ $p->title }}
+            {{ $p->page_title }}
         </div>
         <div class="col-xs-12 col-md-1 padding_fix">
             <div class="pretty p-default p-thick p-pulse" style="margin-right: -5px;">
@@ -16,6 +16,11 @@
         </div>
         <div class="col-xs-12 col-md-2 padding_fix">
             {{ $p->created_at }}
+        </div>
+        <div class="col-xs-12 col-md-1 padding_fix">
+            <a href="{{ route('pages.show', $p->id) }}">
+                <i class="fa fa-edit" style="font-size: 18px; color: lightgreen;"></i>
+            </a>
         </div>
         <div class="col-xs-12 col-md-1 text-center">
             {!! Form::open(['route' => ['pages.destroy', $p->id], 'method' => 'delete', 'onsubmit' => 'return ConfirmDelete()']) !!}

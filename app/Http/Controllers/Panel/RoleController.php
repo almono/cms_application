@@ -16,10 +16,15 @@ class RoleController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         if (Bouncer::can('view-roles') || Auth::user()->super_admin == '1') {
             $roles = Role::paginate(20);
+
+            if ($request->ajax()) {
+                return view('admin.partials.cms_role_listing', ['roles' => $roles])->render();
+            }
+
             return view('admin.cms_roles', compact(['roles']));
         }
         else {

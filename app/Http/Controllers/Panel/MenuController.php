@@ -18,11 +18,16 @@ class MenuController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         if (Bouncer::can('view-menu') || Auth::user()->super_admin == '1') {
             $menu = Menu::paginate(20);
             $menu_main = Menu::where('parent_id','0')->get();
+
+            if ($request->ajax()) {
+                return view('admin.partials.cms_menu_listing', ['menu' => $menu,'menu_main' => $menu_main])->render();
+            }
+
             return view('admin.cms_menu_items', compact(['menu','menu_main']));
         }
         else {
@@ -94,7 +99,8 @@ class MenuController extends Controller
      */
     public function show($id)
     {
-        //
+        $menu = Menu::findOrFail($id);
+        return view('admin.cms_edit_menu',compact('menu'));
     }
 
     /**
@@ -115,9 +121,39 @@ class MenuController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Menu $menu)
     {
-        //
+        $inputs = $request->all();
+
+        try {
+
+            if(isset($inputs['new_name']) && !is_null($inputs['new_name']))
+            {
+                $menu->menu_name = $inputs['new_name'];
+                $menu->menu_slug = str_slug($inputs['new_name']);
+            }
+            if(isset($inputs['new_url']) && !is_null($inputs['new_url']))
+            {
+                $menu->menu_url = $inputs['new_url'];
+            }
+            if(isset($inputs['new_order']) && !is_null($inputs['new_order']))
+            {
+                $menu->order = $inputs['new_order'];
+            }
+            if(isset($inputs['new_parent']) && !is_null($inputs['new_parent']))
+            {
+                $menu->parent_id = $inputs['new_parent'];
+            }
+
+            $menu->save();
+
+            flash()->success("Menu has been updated");
+        }
+        catch(Exception $e) {
+            flash()->error("Menu couldn't be updated");
+        }
+
+        return redirect()->route('menu.index');
     }
 
     /**

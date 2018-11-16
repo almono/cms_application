@@ -18,10 +18,15 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         if (Bouncer::can('view-users') || Auth::user()->super_admin == '1') {
             $users = User::paginate(20);
+
+            if ($request->ajax()) {
+                return view('admin.partials.cms_user_listing', ['users' => $users])->render();
+            }
+
             return view('admin.cms_users', compact(['users']));
         }
         else {

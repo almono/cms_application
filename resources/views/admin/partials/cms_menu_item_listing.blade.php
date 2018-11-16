@@ -32,6 +32,11 @@
             {{ $m->order }}
         </div>
         <div class="col-xs-12 col-md-1 text-center">
+            <a href="{{ route('menu.show', $m->id) }}">
+                <i class="fa fa-edit" style="font-size: 18px; color: lightgreen;"></i>
+            </a>
+        </div>
+        <div class="col-xs-12 col-md-1 text-center">
             {!! Form::open(['route' => ['menu.destroy', $m->id], 'method' => 'delete', 'onsubmit' => 'return ConfirmDelete()']) !!}
             <button type="submit" style="background: transparent; border: none;">
                 <i class="fa fa-times" style="font-size: 16px; color: red;"></i>
