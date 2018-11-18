@@ -292,6 +292,14 @@ a.article:hover {
         overflow-y: scroll;
         top: 0;
         bottom: 0;
+        height: 100vh;
         max-height: calc(100vh - 9rem);
+    }
+    .listing_div {
+        margin-bottom: 5px;
+        padding: 5px 0px;
+    }
+    .listing_edit {
+        padding-top: 3px;
     }
 }

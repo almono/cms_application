@@ -12,7 +12,7 @@
 <div class="sidebar-header text-center">
     <h3>almono's CMS application</h3>
 </div>
-<ul class="list-unstyled components admin-sidebar">
+<ul class="list-unstyled components admin-sidebar data-simplebar">
     @if(Auth::check())
         <li class="text-center" style="height: 150px; padding: 10px;">
             Logged as: <br>
@@ -44,19 +44,25 @@
                 <li>
                     <a href="{{ route('pages.index') }}">Pages</a>
                 </li>
+                <li>
+                    <a href="#">Website Footer</a>
+                </li>
             </ul>
         </li>
         <li>
-            <a href="#">Slider</a>
+            <a href="#">Homepage slider</a>
         </li>
         <li>
-            <a href="#">SEO</a>
+            <a href="#">Website settings</a>
         </li>
         <li>
-            <a href="#">Settings</a>
+            <a href="{{ route('admin_my_account') }}">My account</a>
         </li>
         <li>
             <a href="{{ route('admin_logout') }}">Log out</a>
+        </li>
+        <li class="text-center" style="position: absolute; bottom: 0; left: 0; right: 0;">
+            <span style="font-size: 10px;">Made by almono</span>
         </li>
     @endif
 </ul>

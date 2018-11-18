@@ -57,9 +57,9 @@
                 <div class="form-row col-xs-12 col-sm-8 col-md-8 padding_fix">
                     <div class="form-group col-xs-12 col-sm-12" style="padding-top: 10px;">
                         <div class="col-xs-12 col-sm-12 flex_display padding_fix" style="margin-bottom: 10px;">
-                            @if ($errors->has('title'))
+                            @if ($errors->has('new_name'))
                                 <div class="error" style="color: red; font-size: 12px;">
-                                    {{ $errors->first('title') }}
+                                    {{ $errors->first('new_name') }}
                                 </div>
                             @endif
                             <div class="col-xs-2 padding_fix text-center">
@@ -70,42 +70,42 @@
                             </div>
                         </div>
                         <div class="col-xs-12 col-sm-12 flex_display padding_fix" style="margin-bottom: 10px;">
-                            @if ($errors->has('seo'))
+                            @if ($errors->has('new_url'))
                                 <div class="error" style="color: red; font-size: 12px;">
-                                    {{ $errors->first('seo') }}
+                                    {{ $errors->first('new_url') }}
                                 </div>
                             @endif
                             <div class="col-xs-2 padding_fix text-center">
-                                <label class="new_user_label" for="inputTitle4">New URL</label>
+                                <label class="new_user_label" for="inputURL4">New URL</label>
                             </div>
                             <div class="col-xs-10">
                                 <input type="text" class="form-control" id="inputTitle4" name="new_url" placeholder="{{ $menu->menu_url }}" style="max-width: 200px;">
                             </div>
                         </div>
                         <div class="col-xs-12 col-sm-12 flex_display padding_fix" style="margin-bottom: 10px;">
-                            @if ($errors->has('seo'))
+                            @if ($errors->has('new_order'))
                                 <div class="error" style="color: red; font-size: 12px;">
-                                    {{ $errors->first('seo') }}
+                                    {{ $errors->first('new_order') }}
                                 </div>
                             @endif
                             <div class="col-xs-2 padding_fix text-center">
-                                <label class="new_user_label" for="inputTitle4">New Order</label>
+                                <label class="new_user_label" for="inputOrder4">New Order</label>
                             </div>
                             <div class="col-xs-10">
                                 <input type="number" class="form-control" id="inputTitle4" name="new_order" placeholder="{{ $menu->order }}" min="0" style="max-width: 200px;">
                             </div>
                         </div>
-                        <div class="col-xs-12 col-sm-12 flex_display padding_fix" style="margin-bottom: 10px;">
-                            @if ($errors->has('seo'))
-                                <div class="error" style="color: red; font-size: 12px;">
-                                    {{ $errors->first('seo') }}
-                                </div>
-                            @endif
+                        <div class="col-xs-12 col-sm-12 flex_display padding_fix">
                             <div class="col-xs-2 padding_fix text-center">
-                                <label class="new_user_label" for="inputTitle4">New parent</label>
+                                <label class="new_user_label" for="inputParentName">Parent menu</label>
                             </div>
                             <div class="col-xs-10">
-                                <input type="text" class="form-control" id="inputTitle4" name="new_parent" placeholder="Title" value="{{ $menu->page_title }}" style="max-width: 200px;">
+                                <select class="form-control" name="menu_parent" style="max-width: 200px;">
+                                    <option value="" @if($menu->parent_id == 0) selected @endif>No parent</option>
+                                    @foreach($menu_main as $mm)
+                                        <option value="{{$mm->id}}" @if($menu->parent_id == $mm->id) selected @endif>{{ $mm->menu_name }}</option>
+                                    @endforeach
+                                </select>
                             </div>
                         </div>
                     </div>

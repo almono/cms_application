@@ -234,4 +234,11 @@ class UserController extends Controller
 
     }
 
+    public function getMyAccount()
+    {
+        $id = Auth::user()->id;
+        $user = User::find($id);
+        return view('admin.cms_my_account',compact('user'));
+    }
+
 }

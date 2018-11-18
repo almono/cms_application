@@ -100,7 +100,8 @@ class MenuController extends Controller
     public function show($id)
     {
         $menu = Menu::findOrFail($id);
-        return view('admin.cms_edit_menu',compact('menu'));
+        $menu_main = Menu::whereNotIn('parent_id',['0',$id])->get();
+        return view('admin.cms_edit_menu',compact('menu','menu_main'));
     }
 
     /**

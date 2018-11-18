@@ -45,4 +45,5 @@ Route::post('/admin/change_active_menu', 'Panel\MenuController@changeActive');
 
 Route::post('/admin/change_active_page', 'Panel\PageController@changeActive');
 
-Route::get('/admin/new_age', ['uses' => 'Panel\PageController@newPage', 'as' => 'new_page_form']);
+Route::get('/admin/new_page', ['uses' => 'Panel\PageController@newPage', 'as' => 'new_page_form']);
+Route::get('/admin/my_account', ['uses' => 'Panel\UserController@getMyAccount', 'as' => 'admin_my_account']);
