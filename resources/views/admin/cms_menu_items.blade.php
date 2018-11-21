@@ -3,7 +3,7 @@
     @include('admin.cms_admin_content_top')
     <div class="col-xs-12 padding_fix" style="padding-top: 15px; position: relative;">
         <a class="btn btn-new" id="new_menu_add" style="float: right;"><i class="fa fa-plus" style="padding-right: 5px;"></i>Add new menu item</a>
-        <div class="col-xs-12 col-sm-4 col-md-2 new_user_div" id="new_menu_div">
+        <div class="col-xs-12 col-sm-6 col-md-3 new_user_div" id="new_menu_div">
             {!! Form::open(array('route' => 'menu.store')) !!}
             {!! Form::token() !!}
             <div class="form-row">
@@ -48,29 +48,29 @@
         </div>
     </div>
     <div class="col-xs-12 users-content padding_fix">
-        <div class="col-xs-12 padding_fix cms-headings" style="border-bottom: 1px solid #222; height: 30px;">
-            <div class="col-xs-12 col-sm-12 col-md-1 text-center" style="color: white; line-height: 30px;">
-                <span>Menu item ID</span>
+        <div class="col-xs-12 padding_fix margin_fix cms-headings" style="border-bottom: 1px solid #222; min-height: 30px;">
+            <div class="col-xs-12 col-sm-12 col-md-1 text-center hidden-xs hidden-sm" style="color: white; line-height: 30px;">
+                <span>Menu ID</span>
             </div>
-            <div class="col-xs-12 col-sm-12 col-md-2 text-center" style="color: white; line-height: 30px;">
+            <div class="col-xs-6 col-sm-6 col-md-2 text-center" style="color: white; line-height: 30px;">
                 <span>Name</span>
             </div>
-            <div class="col-xs-12 col-sm-12 col-md-2 text-center" style="color: white; line-height: 30px;">
+            <div class="col-xs-6 col-sm-6 col-md-2 text-center" style="color: white; line-height: 30px;">
                 <span>Parent menu</span>
             </div>
-            <div class="col-xs-12 col-sm-12 col-md-1 text-center" style="color: white; line-height: 30px;">
+            <div class="col-xs-6 col-sm-6 col-md-1 text-center" style="color: white; line-height: 30px;">
                 <span>Active</span>
             </div>
-            <div class="col-xs-12 col-sm-12 col-md-2 text-center" style="color: white; line-height: 30px;">
+            <div class="col-xs-6 col-sm-6 col-md-2 text-center" style="color: white; line-height: 30px;">
                 <span>URL</span>
             </div>
-            <div class="col-xs-12 col-sm-12 col-md-1 text-center" style="color: white; line-height: 30px;">
+            <div class="col-xs-12 col-sm-12 col-md-1 text-center hidden-xs hidden-sm" style="color: white; line-height: 30px;">
                 <span>Order</span>
             </div>
-            <div class="col-xs-12 col-sm-12 col-md-1 text-center" style="color: white; line-height: 30px;">
+            <div class="col-xs-6 col-sm-6 col-md-1 text-center" style="color: white; line-height: 30px;">
                 <span>Edit</span>
             </div>
-            <div class="col-xs-12 col-sm-12 col-md-1 text-center" style="color: white; line-height: 30px;">
+            <div class="col-xs-6 col-sm-6 col-md-1 text-center" style="color: white; line-height: 30px;">
                 <span>Delete</span>
             </div>
         </div>

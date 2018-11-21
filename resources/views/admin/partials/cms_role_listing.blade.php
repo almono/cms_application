@@ -1,5 +1,5 @@
 @foreach($roles as $r)
-    <div class="col-xs-12 padding_fix text-center listing_div" style="color: white; padding-top: 10px; padding-bottom: 10px;">
+    <div class="col-xs-12 padding_fix text-center listing_div" style="color: white; padding-top: 10px; padding-bottom: 10px; @if(!$loop->last) border-bottom: 1px solid #222; @endif">
         <div class="col-xs-12 col-sm-12 col-md-2 padding_fix">
             {{ $r->title }}
         </div>

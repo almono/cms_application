@@ -3,7 +3,7 @@
     @include('admin.cms_admin_content_top')
     <div class="col-xs-12 padding_fix" style="padding-top: 15px; position: relative;">
         <a class="btn btn-new" id="new_ability_add" style="float: right;"><i class="fa fa-plus" style="padding-right: 5px;"></i>Add new ability</a>
-        <div class="col-xs-12 col-sm-4 col-md-2 new_user_div" id="new_ability_div">
+        <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 new_user_div" id="new_ability_div">
             {!! Form::open(array('route' => 'abilities.store')) !!}
             {!! Form::token() !!}
             <div class="form-row">
@@ -30,13 +30,13 @@
             <div class="col-xs-12 col-sm-12 col-md-2 text-center" style="color: white; line-height: 30px;">
                 <span>Name</span>
             </div>
-            <div class="col-xs-12 col-sm-12 col-md-1 text-center" style="color: white; line-height: 30px;">
+            <div class="col-xs-6 col-sm-6 col-md-1 text-center" style="color: white; line-height: 30px;">
                 <span>Active</span>
             </div>
-            <div class="col-xs-12 col-sm-12 col-md-2 text-center" style="color: white; line-height: 30px;">
+            <div class="col-xs-12 col-sm-12 col-md-2 text-center hidden-xs hidden-sm" style="color: white; line-height: 30px;">
                 <span>Created on</span>
             </div>
-            <div class="col-xs-12 col-sm-12 col-md-1 text-center" style="color: white; line-height: 30px;">
+            <div class="col-xs-6 col-sm-6 col-md-1 text-center" style="color: white; line-height: 30px;">
                 <span>Delete</span>
             </div>
 

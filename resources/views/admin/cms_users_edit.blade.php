@@ -6,9 +6,9 @@
             <span style="color: white; line-height: 30px; font-size: 18px;">{{ $user->username }}</span>
         </div>
     </div>
-    <div class="col-xs-12" style="border: 1px solid black; border-top: 0px; padding-bottom: 30px;">
-        <div class="col-md-4">
-            <div class="col-md-12" style="margin-top: 25px; margin-bottom: 25px; padding: 15px; border: 1px solid black;">
+    <div class="col-xs-12 user-edit-container" style="border: 1px solid black; border-top: 0px; padding-bottom: 30px;">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6" style="margin-top: 25px; margin-bottom: 25px; padding: 15px; border: 1px solid black;">
                 <div class="col-md-12 padding_fix text-left" style="padding-bottom: 10px;">
                     <span style="font-size: 20px; font-weight: 600;">
                         User information
@@ -29,8 +29,8 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-4">
-            <div class="col-md-12" style="margin-top: 25px; padding: 15px; border: 1px solid black;">
+        <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="margin-top: 25px; padding: 15px; border: 1px solid black;">
                 <div class="col-md-12 padding_fix text-left" style="padding-bottom: 10px;">
                     <span style="font-size: 20px; font-weight: 600;">
                         User roles
@@ -86,19 +86,21 @@
                 </div>
             @endif
         </div>
-        <div class="col-md-4">
-            <div class="col-md-12" style="margin-top: 25px; margin-bottom: 25px; padding: 15px; border: 1px solid black;">
+        <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="margin-top: 25px; margin-bottom: 25px; padding: 15px; border: 1px solid black;">
                 <div class="col-md-12 padding_fix text-left" style="padding-bottom: 10px;">
                     <span style="font-size: 20px; font-weight: 600;">
                         User permissions
                     </span>
                 </div>
-                @foreach($user_abilities as $ua)
-                    <div class="col-md-12 padding_fix">
-                        {{ $ua->title }}
-                    </div>
-                    <hr class="col-md-12 padding_fix custom-line">
-                @endforeach
+                <div class="user-abilities-list" style="max-height: 300px; overflow: auto; float: left; width: 100%;">
+                    @foreach($user_abilities as $ua)
+                        <div class="col-md-12 padding_fix">
+                            {{ $ua->title }}
+                        </div>
+                        <hr class="col-md-12 padding_fix custom-line">
+                    @endforeach
+                </div>
             </div>
         </div>
     </div>

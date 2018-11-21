@@ -26,7 +26,7 @@
         </div>
     </div>
     <div class="col-xs-12 users-content padding_fix">
-        <div class="col-xs-12 padding_fix cms-headings" style="border-bottom: 1px solid #222; min-height: 30px;">
+        <div class="row col-xs-12 padding_fix margin_fix cms-headings" style="border-bottom: 1px solid #222; min-height: 30px;">
             <div class="col-xs-12 col-sm-12 col-md-2 text-center" style="color: white; line-height: 30px;">
                 <span>Name</span>
             </div>

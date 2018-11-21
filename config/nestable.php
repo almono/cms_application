@@ -9,10 +9,11 @@ return [
         'id',
         'menu_name',
         'menu_slug',
+        'menu_url'
     ],
     'html' => [
         'label' => 'menu_name',
-        'href'  => 'menu_slug'
+        'href'  => 'menu_url'
     ],
     'dropdown' => [
         'prefix' => '',

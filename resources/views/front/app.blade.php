@@ -25,11 +25,11 @@
     <title>almono's CMS application Front</title>
 </head>
 
-<body style="background: #464646">
-    <div class="container-fluid">
-        @include('admin.sidebar')
+<body style="background: #464646;">
+    <div class="container-fluid padding_fix">
+        @include('front.navbar')
     </div>
-    <div id="content">
+    <div class="container">
         @yield('front-content')
     </div>
     <footer>

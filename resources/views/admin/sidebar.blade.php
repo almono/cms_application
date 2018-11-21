@@ -22,7 +22,7 @@
             <a href="{{ route('admin') }}">Home</a>
         </li>
         <li>
-            <a href="#pageSubmenu2" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Models management</a>
+            <a href="#pageSubmenu2" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Models management<span class="caret"></span></a>
             <ul class="collapse list-unstyled" id="pageSubmenu2">
                 <li>
                     <a href="{{ route('users.index') }}">Users</a>
@@ -36,7 +36,7 @@
             </ul>
         </li>
         <li>
-            <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Content management</a>
+            <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Content management<span class="caret"></span></a>
             <ul class="collapse list-unstyled" id="pageSubmenu">
                 <li>
                     <a href="{{ route('menu.index') }}">Menu</a>

@@ -18,4 +18,8 @@ class Menu extends Model
         return $this->belongsTo('App\Menu','parent_id');
     }
 
+    public static function getMenu() {
+        return Menu::nested()->orderBy('order','ASC')->get();
+    }
+
 }
