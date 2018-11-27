@@ -27,11 +27,13 @@
                     @endif
                 @endforeach
             </ul>
-            <form class="navbar-form navbar-right">
-                <div class="form-group">
+            <form class="col-xs-12 navbar-form navbar-right">
+                <div class="col-xs-10 form-group padding_fix">
                     <input type="text" class="form-control" placeholder="Search" style="max-width: 200px;">
                 </div>
-                <button type="submit" class="btn btn-default" style="margin-left: -10px;"><i class="fa fa-search"></i></button>
+                <div class="col-xs-2 form-group padding_fix">
+                    <button type="submit" class="btn btn-default" style="margin-left: -10px;"><i class="fa fa-search"></i></button>
+                </div>
             </form>
         </div>
     </div>

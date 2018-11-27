@@ -6,29 +6,29 @@
             <div class="col-xs-12" style="padding: 20px 15px;">
                 <span style="font-size: 30px; font-weight: 600;">My account</span>
             </div>
-            <div class="col-xs-12" style="padding-top: 20px;">
+            <div class="col-xs-12 padding_fix" style="padding-top: 20px;">
                 {!! Form::open(array('route' => [ 'users.update', $user ], 'files' => 'true', 'method' => 'PUT' )) !!}
                 {!! Form::token() !!}
                 <div class="form-row col-xs-12 col-sm-3 col-md-3 padding_fix">
-                    <div class="form-group col-xs-12 col-sm-12" style="padding-top: 10px;">
+                    <div class="form-group col-xs-12 col-sm-12 padding_fix" style="padding-top: 10px;">
                         <div class="col-xs-12 col-sm-12 padding_fix" style="margin-bottom: 20px;">
                             @if ($errors->has('title'))
                                 <div class="error" style="color: red; font-size: 12px;">
                                     {{ $errors->first('title') }}
                                 </div>
                             @endif
-                            <div class="col-xs-4 text-right border-right-1">
+                            <div class="col-xs-5 col-sm-4 text-right border-right-1">
                                 <label class="new_user_label" for="inputTitle4">Username</label>
                             </div>
-                            <div class="col-xs-8 text-left">
+                            <div class="col-xs-7 col-sm-8 text-left">
                                 <div>{{ $user->username }}</div>
                             </div>
                         </div>
                         <div class="col-xs-12 col-sm-12 padding_fix" style="margin-bottom: 20px;">
-                            <div class="col-xs-4 text-right border-right-1">
+                            <div class="col-xs-5 col-sm-4 text-right border-right-1">
                                 <label class="new_user_label" for="inputSeo4">Email</label>
                             </div>
-                            <div class="col-xs-8 text-left">
+                            <div class="col-xs-7 col-sm-8 text-left">
                                 <div>{{ $user->email }}</div>
                             </div>
                         </div>

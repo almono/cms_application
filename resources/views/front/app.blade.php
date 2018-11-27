@@ -32,9 +32,11 @@
     <div class="container">
         @yield('front-content')
     </div>
-    <footer>
-        @include('front.footer')
-    </footer>
+    <div class="container">
+        <footer>
+            @include('front.footer')
+        </footer>
+    </div>
 </body>
 </html>
 
