@@ -28,7 +28,7 @@ Route::group(['prefix' => 'admin'], function() {
     Route::resource('pages','Panel\PageController');
 });
 
-
+/* PANE ROUTES */
 
 Route::post('/admin/change_active_user', 'Panel\UserController@changeActive');
 Route::post('/admin/change_admin_user', 'Panel\UserController@changeAdmin');
@@ -47,3 +47,7 @@ Route::post('/admin/change_active_page', 'Panel\PageController@changeActive');
 
 Route::get('/admin/new_page', ['uses' => 'Panel\PageController@newPage', 'as' => 'new_page_form']);
 Route::get('/admin/my_account', ['uses' => 'Panel\UserController@getMyAccount', 'as' => 'admin_my_account']);
+
+/* FRONT ROUTES */
+
+Route::get('/page/{page_slug}', ['uses' => 'Front\PageController@showPage', 'as' => 'show_page']);

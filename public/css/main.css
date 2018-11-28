@@ -34,6 +34,36 @@ a:focus {
     transition: all 0.3s;
 }
 
+.login_body {
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.login_box {
+    background: rgba(70,70,70,0.3);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border: 1px solid black;
+    padding: 35px;
+    border-radius: 10px;
+    color: #222;
+}
+
+.login_header {
+    color: white;
+    font-size: 24px;
+    font-weight: 600;
+    margin-bottom: 20px;
+}
+
+.label_login {
+    color: white;
+    font-weight: 400;
+    margin: 0px;
+}
+
 .navbar {
     padding: 15px 10px;
     background: #fff;
@@ -240,6 +270,14 @@ a.article:hover {
     color: #DADDE2;
 }
 
+.link-new {
+    color: #C9D255;
+}
+
+.link-new:hover {
+    color: #879042;
+}
+
 .new_user_div {
     display: none;
     position: absolute;
@@ -286,6 +324,19 @@ a.article:hover {
 
 .page_descriptions > .note-editor {
     margin-bottom: 0px;
+}
+
+.home_list {
+    padding-left: 20px;
+    list-style: square;
+}
+
+.home_list_item {
+    color: #C9D255;
+}
+
+.home_list_item:hover {
+    color: #879042;
 }
 
 .border-right-1 {

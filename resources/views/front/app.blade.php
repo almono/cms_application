@@ -32,10 +32,10 @@
     <div class="container">
         @yield('front-content')
     </div>
-    <div class="container">
-        <footer>
+    <div class="container-fluid" style="background-color: #222;">
+        <div class="footer">
             @include('front.footer')
-        </footer>
+        </div>
     </div>
 </body>
 </html>
