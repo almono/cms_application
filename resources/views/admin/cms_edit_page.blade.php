@@ -36,7 +36,7 @@
                                 </div>
                             @endif
                                 <div class="col-xs-2 padding_fix text-center">
-                                    <label class="new_user_label" for="inputSeo4">SEO</label>
+                                    <label class="new_user_label" for="inputSeo4">SEO Title</label>
                                 </div>
                                 <div class="col-xs-10">
                                     <input type="text" class="form-control" id="inputSeo4" name="seo" placeholder="Title used for SEO"  value="{{ $page->seo_title }}">
@@ -49,7 +49,7 @@
                                 </div>
                             @endif
                             <div class="col-xs-2 padding_fix text-center">
-                                <label class="new_user_label" for="inputSeo4">SEO</label>
+                                <label class="new_user_label" for="inputSeo4">SEO Desc</label>
                             </div>
                             <div class="col-xs-10">
                                 <input type="text" class="form-control" id="inputSeo4" name="seo_desc" placeholder="Description used for SEO"  value="{{ $page->seo_description }}">

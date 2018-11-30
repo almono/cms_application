@@ -143,6 +143,7 @@ class PageController extends Controller
         try {
 
             $page->page_title = $inputs['page_title'];
+            $page->page_slug = str_slug($inputs['page_title']);
             $page->description_1 = $inputs['page_desc1'];
             $page->description_2 = $inputs['page_desc2'];
             $page->seo_title = $request['seo'];

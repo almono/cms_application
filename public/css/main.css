@@ -1,6 +1,13 @@
 @import "https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700";
 
-html,body { height:100%; }
+html {
+    position: relative;
+    min-height: 100%;
+}
+
+html,body {
+    min-height: 100%;
+}
 
 body {
     font-family: 'Poppins', sans-serif;
@@ -8,12 +15,43 @@ body {
     color: white;
 }
 
+.footer-container {
+    position: absolute;
+    width: 100%;
+    bottom: 0;
+    left: 0;
+}
+
 p {
     font-family: 'Poppins', sans-serif;
     font-size: 1.1em;
     font-weight: 300;
     line-height: 1.7em;
-    color: #999;
+    color: #b0b0b0;
+}
+
+#navbar {
+    z-index: 100 !important;
+}
+
+.sticky {
+    position: fixed;
+    top: 0;
+    width: 100%;
+}
+
+.sticky + .container {
+    padding-top: 90px;
+}
+
+.owl-carousel .item {
+    min-height: 200px;
+}
+
+.owl-home {
+    padding: 10px;
+    border-top: 1px solid #222;
+    border-bottom: 1px solid #222;
 }
 
 .padding_fix {
@@ -337,14 +375,53 @@ a.article:hover {
 
 .home_list_item:hover {
     color: #879042;
+    text-decoration: underline;
+}
+
+.slide-text {
+    padding-top: 15px;
 }
 
 .border-right-1 {
     border-right: 1px solid #858585;
 }
 
+.m-0-bottom {
+    margin-bottom: 0px;
+}
+
 .m-5-bottom {
     margin-bottom: 5px;
+}
+
+.resume_profile > img {
+    padding: 20px;
+    max-height: 250px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.resume_profile_info > div {
+    padding-left: 0px;
+}
+
+.resume_profile_info > div > i {
+    font-size: 20px;
+    width: 30px;
+    text-align: center;
+    height: 30px;
+}
+
+.resume_link {
+    color: lightsteelblue;
+}
+
+.resume_info {
+    margin-top: 20px;
+}
+
+.resume_type {
+    margin-bottom: 15px;
 }
 
 @media (max-width: 768px) {

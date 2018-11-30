@@ -22,8 +22,15 @@ class PageController extends Controller
      */
     public function showPage($page_slug)
     {
-        $page = Page::where('page_slug',$page_slug)->first(); dd($page);
-        return view('front.home');
+        $page = Page::where('page_slug',$page_slug)->first();
+
+        if (isset($page) && !is_null($page))
+        {
+            return view('front.page',compact('page'));
+        }
+
+        flash()->error("That page could not be displayed");
+        return redirect('/');
     }
 
 }

@@ -50,4 +50,5 @@ Route::get('/admin/my_account', ['uses' => 'Panel\UserController@getMyAccount', 
 
 /* FRONT ROUTES */
 
+Route::get('/about-me', ['uses' => 'Front\HomeController@AboutMe', 'as' => 'about-me']);
 Route::get('/page/{page_slug}', ['uses' => 'Front\PageController@showPage', 'as' => 'show_page']);

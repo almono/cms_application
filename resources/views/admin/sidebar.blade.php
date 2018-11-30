@@ -62,7 +62,7 @@
             <a href="{{ route('admin_logout') }}">Log out</a>
         </li>
         <li class="text-center" style="position: absolute; bottom: 0; left: 0; right: 0;">
-            <span style="font-size: 10px;">Made by almono</span>
+            <span style="font-size: 10px;">Made by Paweł Walczykiewicz</span>
         </li>
     @endif
 </ul>
