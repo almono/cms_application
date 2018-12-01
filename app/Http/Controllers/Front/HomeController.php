@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
 use App\Page;
+use File;
 
 class HomeController extends Controller
 {
@@ -16,7 +17,7 @@ class HomeController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth', ['except' => ['index','AboutMe']] );
+        $this->middleware('auth', ['except' => ['index','aboutMe','downloadFile']] );
     }
 
     /**
@@ -30,9 +31,23 @@ class HomeController extends Controller
         return view('front.home',compact('slider'));
     }
 
-    public function AboutMe()
+    public function aboutMe()
     {
         return view('front.about_me');
     }
 
+    public function downloadFile($filename)
+    {
+        $filepath = public_path('projects\\' . $filename . '.rar');
+
+        if(File::exists($filepath))
+        {
+            return \Response::download( $filepath, $filename );
+        }
+        else
+        {
+            flash()->error('This file was not found on the server!');
+            return redirect('/');
+        }
+    }
 }

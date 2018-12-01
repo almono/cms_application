@@ -99,11 +99,11 @@
 
         $(document).ready( function() {
             $('.page_desc1').summernote({
-                disableResizeEditor: true,
+                disableResizeEditor: false,
                 placeholder: 'Main page description...'
             });
             $('.page_desc2').summernote({
-                disableResizeEditor: true,
+                disableResizeEditor: false,
                 placeholder: 'Additional page description...'
             });
 
