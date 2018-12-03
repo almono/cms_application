@@ -1,4 +1,4 @@
-@extends('front.app')
+@extends('front.app', ['seo_title' => 'Homepage - almono CMS application'])
 @section('front-content')
     <h1>Welcome to my application!</h1>
     <div class="col-xs-12 padding_fix">

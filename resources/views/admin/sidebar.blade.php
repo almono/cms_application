@@ -50,12 +50,6 @@
             </ul>
         </li>
         <li>
-            <a href="#">Homepage slider</a>
-        </li>
-        <li>
-            <a href="#">Website settings</a>
-        </li>
-        <li>
             <a href="{{ route('admin_my_account') }}">My account</a>
         </li>
         <li>
