@@ -38,7 +38,7 @@ class HomeController extends Controller
 
     public function downloadFile($filename)
     {
-        $filepath = public_path('projects\\' . $filename . '.rar');
+        $filepath = public_path('projects/' . $filename . '.rar');
 
         if(File::exists($filepath))
         {
