@@ -90,7 +90,7 @@ class MenuController extends Controller
         }
         else {
             flash()->error("You don't have permission to create new menu item!");
-            return redirect()->route('admin');
+            return back();
         }
 
         return back();
@@ -104,9 +104,15 @@ class MenuController extends Controller
      */
     public function show($id)
     {
-        $menu = Menu::findOrFail($id);
-        $menu_main = Menu::whereNotIn('parent_id',['0',$id])->get();
-        return view('admin.cms_edit_menu',compact('menu','menu_main'));
+        if (Bouncer::can('edit-menu') || Auth::user()->super_admin == '1') {
+            $menu = Menu::findOrFail($id);
+            $menu_main = Menu::whereNotIn('parent_id', ['0', $id])->get();
+            return view('admin.cms_edit_menu', compact('menu', 'menu_main'));
+        }
+        else {
+            flash()->error("You don't have permission to edit menu items!");
+            return back();
+        }
     }
 
     /**
@@ -170,16 +176,20 @@ class MenuController extends Controller
      */
     public function destroy($id)
     {
-        try {
-            $menu = Menu::findOrFail($id);
-            $menu->delete();
-            flash()->success('Menu has been removed');
+        if (Bouncer::can('delete-menu') || Auth::user()->super_admin == '1') {
+            try {
+                $menu = Menu::findOrFail($id);
+                $menu->delete();
+                flash()->success('Menu has been removed');
+            }
+            catch (Exception $e) {
+                flash()->error("Menu couldn't be removed");
+            }
         }
-        catch (Exception $e) {
-            flash()->error("Menu couldn't be removed");
+        else {
+            flash()->error("You don't have permission to delete menu items!");
+            return back();
         }
-
-        return back();
     }
     
     public function changeActive(Request $request)

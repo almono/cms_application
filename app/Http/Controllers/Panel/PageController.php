@@ -114,8 +114,14 @@ class PageController extends Controller
      */
     public function show($id)
     {
-        $page = Page::findOrFail($id);
-        return view('admin.cms_edit_page',compact('page'));
+        if (Bouncer::can('edit-pages') || Auth::user()->super_admin == '1') {
+            $page = Page::findOrFail($id);
+            return view('admin.cms_edit_page', compact('page'));
+        }
+        else {
+            flash()->error("You don't have permission to edit pages!");
+            return back();
+        }
     }
 
     /**
@@ -185,16 +191,19 @@ class PageController extends Controller
      */
     public function destroy($id)
     {
-        try {
-            $page = Page::findOrFail($id);
-            $page->delete();
-            flash()->success('Page has been removed');
+        if (Bouncer::can('delete-pages') || Auth::user()->super_admin == '1') {
+            try {
+                $page = Page::findOrFail($id);
+                $page->delete();
+                flash()->success('Page has been removed');
+            } catch (Exception $e) {
+                flash()->error("Page couldn't be removed");
+            }
         }
-        catch (Exception $e) {
-            flash()->error("Page couldn't be removed");
+        else {
+                flash()->error("You don't have permission to delete pages!");
+                return back();
         }
-
-        return back();
     }
 
     public function changeActive(Request $request)

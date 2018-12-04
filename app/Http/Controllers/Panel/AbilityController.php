@@ -70,7 +70,7 @@ class AbilityController extends Controller
         }
         else {
             flash()->error("You don't have permission to create new ability!");
-            return redirect()->route('admin');
+            return back();
         }
 
         return back();
@@ -118,16 +118,19 @@ class AbilityController extends Controller
      */
     public function destroy($id)
     {
-        try {
-            $ability = Ability::findOrFail($id);
-            $ability->delete();
-            flash()->success('Ability has been removed');
+        if (Bouncer::can('delete-abilities') || Auth::user()->super_admin == '1') {
+            try {
+                $ability = Ability::findOrFail($id);
+                $ability->delete();
+                flash()->success('Ability has been removed');
+            } catch (Exception $e) {
+                flash()->error("Ability couldn't be removed");
+            }
         }
-        catch (Exception $e) {
-            flash()->error("Ability couldn't be removed");
+        else {
+                flash()->error("You don't have permission to delete abilities!");
+                return back();
         }
-
-        return back();
     }
 
     public function changeActive(Request $request)
