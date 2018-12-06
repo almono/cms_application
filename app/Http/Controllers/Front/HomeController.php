@@ -4,7 +4,11 @@ namespace App\Http\Controllers\Front;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Spatie\Sitemap\SitemapGenerator;
+use Spatie\Sitemap\Tags\Url;
+use Spatie\Sitemap\Sitemap;
 
+use Carbon\Carbon;
 use App\Page;
 use File;
 
@@ -17,7 +21,7 @@ class HomeController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth', ['except' => ['index','aboutMe','downloadFile']] );
+        $this->middleware('auth', ['except' => ['index','aboutMe','downloadFile','generateSitemap']] );
     }
 
     /**
@@ -49,5 +53,11 @@ class HomeController extends Controller
             flash()->error('This file was not found on the server!');
             return redirect('/');
         }
+    }
+
+    public function generateSitemap()
+    {
+        SitemapGenerator::create('http://www.cms.almono.pl')
+                        ->writeToFile(public_path('sitemap.xml'));
     }
 }

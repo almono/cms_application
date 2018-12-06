@@ -1,6 +1,6 @@
 @extends('front.app', ['seo_title' => 'Homepage - almono CMS application'])
 @section('front-content')
-    <h1>Welcome to my application!</h1>
+    <h1>almono's CMS Application Homepage</h1>
     <div class="col-xs-12 padding_fix">
         <p>
             Hello! This is an application I made completely from scratch to practice and improve my front-end and back-end skills with the help of Laravel 5.7 Framework.
