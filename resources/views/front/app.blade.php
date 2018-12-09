@@ -16,23 +16,18 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="{{URL::asset('css/app.css')}}"/>
     <script type="text/javascript" src="{{URL::asset('js/app.js') }}"></script>
-    <?php /*
-    <link rel="stylesheet" href="{{URL::asset('css/bootstrap.min.css')}}"/>
-    <link rel="stylesheet" href="{{ URL::asset('css/main.css') }}">
-    <link rel="stylesheet" href="{{ URL::asset('css/jquery-ui.css') }}">
-    <link rel="stylesheet" href="{{ URL::asset('css/select2.min.css') }}">
-    <link rel="stylesheet" href="{{ URL::asset('css/pretty-checkbox.min.css') }}">
-    <link rel="stylesheet" href="{{ URL::asset('css/owl.carousel.min.css') }}">
-    <link rel="stylesheet" href="{{ URL::asset('css/owl.theme.default.min.css') }}">
 
-    <script type="text/javascript" src="{{URL::asset('js/jquery-3.2.1.js') }}"></script>
-    <script type="text/javascript" src="{{URL::asset('js/jquery-ui.js') }}"></script>
-    <script type="text/javascript" src="{{URL::asset('js/jquery.sticky.js') }}"></script>
-    <script type="text/javascript" src="{{URL::asset('js/bootstrap.min.js')}}"></script>
-    <script type="text/javascript" src="{{URL::asset('js/main.js')}}"></script>
-    <script type="text/javascript" src="{{URL::asset('js/select2.min.js')}}"></script>
-    <script type="text/javascript" src="{{URL::asset('js/owl.carousel.min.js')}}"></script>
- */ ?>
+    @if (!isset($_SERVER['HTTP_USER_AGENT']) || stripos($_SERVER['HTTP_USER_AGENT'], 'Speed Insights') === false)
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-130574294-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'UA-130574294-1');
+    </script>
+    @endif
 </head>
 
 <body style="background: #464646;">

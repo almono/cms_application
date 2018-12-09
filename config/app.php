@@ -155,6 +155,7 @@ return [
         Silber\Bouncer\BouncerServiceProvider::class,
         Nestable\NestableServiceProvider::class,
         Intervention\Image\ImageServiceProvider::class,
+        Spatie\Analytics\AnalyticsServiceProvider::class,
 
         /*
          * Application Service Providers...
@@ -220,7 +221,7 @@ return [
         'Bouncer' => Silber\Bouncer\BouncerFacade::class,
         'Nestable' => Nestable\Facades\NestableService::class,
         'Image' => Intervention\Image\Facades\Image::class,
-
+        'Analytics' => Spatie\Analytics\AnalyticsFacade::class,
 
 
     ],
