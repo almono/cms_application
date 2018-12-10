@@ -41,6 +41,7 @@
                         </div>
                     </div>
                 </div>
+                @if($user->super_admin == '1')
                 <div class="form-row col-xs-12 col-sm-8 col-md-8 padding_fix">
                     <div class="form-group col-xs-12 col-sm-12" style="padding-top: 10px;">
                         <div class="col-xs-12 col-sm-12 flex_display padding_fix" style="margin-bottom: 10px;">
@@ -63,6 +64,7 @@
                         <button class="btn btn-new" type="submit" value="Update page">Update</button>
                     </div>
                 </div>
+                @endif
                 {!! Form::close() !!}
             </div>
         </div>
