@@ -13,15 +13,18 @@
         </div>
         <div class="col-xs-12 col-sm-8 col-md-9 resume_profile_info padding_fix">
             <h2>Paweł Walczykiewicz</h2>
-            <div class="col-xs-12">
-                <i class="fa fa-home"></i>Address
-            </div>
-            <div class="col-xs-12">
-                <i class="fa fa-phone"></i>602-680-510
-            </div>
-            <div class="col-xs-12">
-                <i class="fa fa-envelope"></i><a href="mailto:pwalczykiewicz93@gmail.com?Subject=Message%20from%20resume%20page" class="resume_link">pwalczykiewicz93@gmail.com</a>
-            </div>
+            @if(Auth::check())
+                <div class="col-xs-12">
+                    <i class="fa fa-phone"></i>602-680-510
+                </div>
+                <div class="col-xs-12">
+                    <i class="fa fa-envelope"></i><a href="mailto:pwalczykiewicz93@gmail.com?Subject=Message%20from%20resume%20page" class="resume_link">pwalczykiewicz93@gmail.com</a>
+                </div>
+            @else
+                <div class="col-xs-12">
+                    <i class="fa fa-times"></i>Certain informations are available only to logged in users!
+                </div>
+            @endif
             <div class="col-xs-12">
                 <i class="fa fa-linkedin"></i><a href="https://www.linkedin.com/in/pwalczykiewicz/" class="resume_link">My Linkedin Profile</a>
             </div>
