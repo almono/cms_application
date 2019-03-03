@@ -43,7 +43,7 @@
                 @include('front.footer')
             </div>
         </div>
-        <div class="container" style="position: fixed; left: 0; right: 0; bottom: 20%;">
+        <div class="container" style="position: fixed; left: 0; right: 0; bottom: 20%; z-index: 10;">
             @if (session()->has("flash_notification"))
                 @include('flash::message')
             @endif

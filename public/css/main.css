@@ -424,6 +424,35 @@ a.article:hover {
     margin-bottom: 15px;
 }
 
+.insta-popup {
+    max-width: 100%;
+    max-height: 100%;
+}
+
+.instagram-container {
+    height: 300px;
+}
+
+.instagram-div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.owl-instagram > .owl-stage-outer {
+    height: 100%;
+}
+
+.owl-instagram > .owl-stage-outer > .owl-stage {
+    height: 100%;
+    display: flex;
+}
+.owl-instagram > .owl-stage-outer > .owl-stage > .owl-item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 @media (max-width: 768px) {
     #sidebar {
         margin-left: -250px;
