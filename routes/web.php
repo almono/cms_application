@@ -26,6 +26,7 @@ Route::group(['prefix' => 'admin'], function() {
     Route::resource('roles','Panel\RoleController');
     Route::resource('menu','Panel\MenuController');
     Route::resource('pages','Panel\PageController');
+    Route::resource('about_me','Panel\AboutMeController');
 });
 
 /* PANE ROUTES */

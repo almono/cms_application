@@ -10,6 +10,7 @@ use Spatie\Sitemap\Sitemap;
 
 use Carbon\Carbon;
 use App\Page;
+use App\AboutMe;
 use File;
 
 class HomeController extends Controller
@@ -37,7 +38,8 @@ class HomeController extends Controller
 
     public function aboutMe()
     {
-        return view('front.about_me');
+        $info = AboutMe::first();
+        return view('front.about_me',compact('info'));
     }
 
     public function downloadFile($filename)

@@ -459,6 +459,11 @@ a.article:hover {
     justify-content: center;
 }
 
+.dark-input {
+    background-color: #464646;
+    padding: 5px;
+}
+
 @media (max-width: 768px) {
     #sidebar {
         margin-left: -250px;

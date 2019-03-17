@@ -45,6 +45,9 @@
                     <a href="{{ route('pages.index') }}">Pages</a>
                 </li>
                 <li>
+                    <a href="{{ route('about_me.index') }}">About me</a>
+                </li>
+                <li>
                     <a href="#">Website Footer</a>
                 </li>
             </ul>
