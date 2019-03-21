@@ -10,10 +10,10 @@
             </div>
         </div>
         <div class="col-xs-12" style="padding: 15px;">
-            <textarea class="col-xs-12 col-sm-12 about_me_desc text-center" name="about_me_desc" style="background-color: #464646; padding: 15px;">{{ $info->description }}</textarea>
+            <textarea class="col-xs-12 col-sm-offset-1 col-sm-10 about_me_desc text-center" name="about_me_desc" style="background-color: #464646; padding: 15px;">{{ $info->description }}</textarea>
             <div class="col-xs-12 text-center" style="margin-top: 10px;">
-                <button id="edit" class="btn btn-new" onclick="edit()" type="button">Edit</button>
-                <button id="save" class="btn btn-new" onclick="save()" type="button">Save</button>
+                <button id="edit" class="btn btn-new" type="button">Edit</button>
+                <button id="save" class="btn btn-new" type="button">Save</button>
             </div>
         </div>
 
@@ -22,7 +22,7 @@
         <div class="col-xs-12 padding_fix cms-headings" style="height: 30px; margin-bottom: 5px">
             <div class="col-xs-12 text-left" style="border-bottom: 1px solid black; color: white; line-height: 30px;">
                 <span>Main information</span>
-                <button type="button" class="btn btn-new" id="add_new_main" style="float: right; border: 2px solid black; margin-bottom: 1px; border-bottom: 0px;">Add new</button>
+                <button type="button" class="btn btn-new" id="add_new_main" name="main" style="float: right; border: 2px solid black; margin-bottom: 1px; border-bottom: 0px;">Add new</button>
             </div>
         </div>
         <div class="col-xs-12" id="main_list" style="padding: 15px; border-bottom: 1px solid black;">
@@ -31,7 +31,7 @@
                     <div class="col-xs-12 padding_fix about-div text-center">
                         <input class="dark-input" type="text" name="main[key][]" value="{{ $key }}">
                         <input class="dark-input" type="text" name="main[value][]" value="{{ $value }}">
-                        <i class="fa fa-times" id="input_remover" style="font-size: 16px; color: red; margin-left: 10px; cursor: pointer;"></i>
+                        <i class="fa fa-times input-remover" id="input_remover"></i>
                     </div>
                 @endforeach
             @endif
@@ -47,25 +47,29 @@
 
         $(document).ready( function() {
 
-            $('#add_new_main').click( function() {
-                $("#main_list").append("<div class=\"col-xs-12 padding_fix about-div text-center\" id=\"main_list\">\n" +
-                    "                        <input class=\"dark-input\" type=\"text\" name=\"main[key][]\">\n" +
-                    "                        <input class=\"dark-input\" type=\"text\" name=\"main[value][]\">\n" +
+            // id starts with add_new
+            $("button[id ^= 'add_new']").on('click', function(event) {
+                // get name attribute of clicked tag
+                var clicked_name = event.delegateTarget.name;
+                $("#" + clicked_name + "_list").append("<div class=\"col-xs-12 padding_fix about-div text-center\" id=\"main_list\">\n" +
+                    "                        <input class=\"dark-input\" type=\"text\" name=" + clicked_name + "[key][]\">\n" +
+                    "                        <input class=\"dark-input\" type=\"text\" name=" + clicked_name + "[value][]\">\n" +
+                    "                        <i class=\"fa fa-times input-remover\" id=\"input_remover\"></i>\n "+
                     "                    </div>");
             });
 
-            $("#input_remover").on('click', function() {
+            $(document).on('click', '#input_remover' ,function() {
                $(this).parent().remove();
             });
+
+            $('#edit').on('click', function() {
+                $('.about_me_desc').summernote({focus: true});
+            });
+
+            $("#save").on('click', function() {
+                var markup = $('.about_me_desc').summernote('code');
+                $('.about_me_desc').summernote('destroy');
+            });
         });
-
-        function edit() {
-            $('.about_me_desc').summernote({focus: true});
-        }
-
-        function save() {
-            var markup = $('.about_me_desc').summernote('code');
-            $('.about_me_desc').summernote('destroy');
-        }
     </script>
 @stop

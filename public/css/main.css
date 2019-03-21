@@ -463,6 +463,13 @@ a.article:hover {
     padding: 5px;
 }
 
+.input-remover {
+    font-size: 16px;
+    color: red;
+    margin-left: 10px;
+    cursor: pointer;
+}
+
 @media (max-width: 768px) {
     #sidebar {
         margin-left: -250px;

@@ -459,9 +459,21 @@ a.article:hover {
     justify-content: center;
 }
 
+.about-div {
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
 .dark-input {
     background-color: #464646;
     padding: 5px;
+}
+
+.input-remover {
+    font-size: 16px;
+    color: red;
+    margin-left: 10px;
+    cursor: pointer;
 }
 
 @media (max-width: 768px) {
