@@ -21,21 +21,54 @@
     <div class="col-xs-12 col-sm-offset-3 col-sm-6 padding_fix">
         <div class="col-xs-12 padding_fix cms-headings" style="height: 30px; margin-bottom: 5px">
             <div class="col-xs-12 text-left" style="border-bottom: 1px solid black; color: white; line-height: 30px;">
-                <span>Main information</span>
-                <button type="button" class="btn btn-new" id="add_new_main" name="main" style="float: right; border: 2px solid black; margin-bottom: 1px; border-bottom: 0px;">Add new</button>
+                <h4 style="font-weight: 600;">Main information</h4>
             </div>
         </div>
         <div class="col-xs-12" id="main_list" style="padding: 15px; border-bottom: 1px solid black; margin-bottom: 20px;">
             @if(isset($info->main) && !is_null($info->main))
-                @foreach($info->main as $key => $value)
-                    <div class="col-xs-12 padding_fix about-div text-center">
-                        <input class="dark-input" type="text" name="main[key][]" value="{{ $key }}">
-                        <input class="dark-input" type="text" name="main[value][]" value="{{ $value }}">
-                        <i class="fa fa-times input-remover" id="input_remover"></i>
+                <?php $main_field = 1; ?>
+                @foreach($info->main as $main)
+                    <div class="col-xs-12 text-center main_field" id="main_inputs{{ $main_field }}">
+                        <h4 class="col-xs-12 text-center">Main field {{ $main_field }}</h4>
+                        <button type="button" class="btn btn-new" id="add_values_main" name="main_inputs{{ $main_field }}" value="main">Add new values</button>
+                        <i class="fa fa-times input-remover" id="field_remover"></i>
+                        @foreach($main as $key => $value)
+                            <div class="col-xs-12 padding_fix about-div text-center" id="main_{{ $main_field }}">
+                                <input class="dark-input" type="text" name="main[main_inputs{{$main_field}}][keys][]" value="{{ $key }}">
+                                <input class="dark-input" type="text" name="main[main_inputs{{$main_field}}][values][]" value="{{ $value }}">
+                                <i class="fa fa-times input-remover" id="input_remover"></i>
+                            </div>
+                        @endforeach
                     </div>
+                    <?php $main_field += 1; ?>
                 @endforeach
             @endif
         </div>
+        <button type="button" class="btn btn-new" id="add_new_main" name="main" value="{{ $main_field }}" style="float: right; border: 2px solid black; margin-bottom: 1px; border-bottom: 0px; margin-top: 10px;">Add new field</button>
+
+        <div class="col-xs-12" id="education_list" style="padding: 15px; border-bottom: 1px solid black; margin-bottom: 20px;">
+            @if(isset($info->education) && !is_null($info->education))
+                <?php $education_field = 1; ?>
+                @foreach($info->education as $edu)
+                    <div class="col-xs-12 text-center education_field" id="education_inputs{{ $education_field }}">
+                        <h4 class="col-xs-12 text-center">Education field {{ $education_field }}</h4>
+                        <button type="button" class="btn btn-new" id="add_values_education" name="education_inputs{{ $education_field }}" value="education">Add new values</button>
+                        <i class="fa fa-times input-remover" id="field_remover"></i>
+                        @foreach($edu as $key => $value)
+                            <div class="col-xs-12 padding_fix about-div text-center" id="education_{{ $education_field }}">
+                                <input class="dark-input" type="text" name="education[education_inputs{{$education_field}}][keys][]" value="{{ $key }}">
+                                <input class="dark-input" type="text" name="education[education_inputs{{$education_field}}][values][]" value="{{ $value }}">
+                                <i class="fa fa-times input-remover" id="input_remover"></i>
+                            </div>
+                        @endforeach
+                    </div>
+                    <?php $education_field += 1; ?>
+                @endforeach
+            @endif
+        </div>
+        <button type="button" class="btn btn-new" id="add_new_education" name="education" value="{{ $education_field }}" style="float: right; border: 2px solid black; margin-bottom: 1px; border-bottom: 0px; margin-top: 10px;">Add new field</button>
+
+    <?php /*
         <div class="col-xs-12 padding_fix cms-headings" style="height: 30px; margin-bottom: 5px">
             <div class="col-xs-12 text-left" style="border-bottom: 1px solid black; color: white; line-height: 30px;">
                 <span>Education</span>
@@ -53,6 +86,7 @@
                 @endforeach
             @endif
         </div>
+*/ ?>
         <div class="col-xs-12 text-center" style="margin-top: 15px;">
             <input type="submit" class="btn btn-new" value="Update">
         </div>
@@ -65,14 +99,32 @@
         $(document).ready( function() {
 
             // id starts with add_new
-            $("button[id ^= 'add_new']").on('click', function(event) {
+            $(document).on('click',"button[id ^= 'add_values']", function(event) {
                 // get name attribute of clicked tag
-                var clicked_name = event.delegateTarget.name;
-                $("#" + clicked_name + "_list").append("<div class=\"col-xs-12 padding_fix about-div text-center\" id=" + clicked_name + "_list\">\n" +
-                    "                        <input class=\"dark-input\" type=\"text\" name=" + clicked_name + "[key][]\">\n" +
-                    "                        <input class=\"dark-input\" type=\"text\" name=" + clicked_name + "[value][]\">\n" +
-                    "                        <i class=\"fa fa-times input-remover\" id=\"input_remover\"></i>\n "+
-                    "                    </div>");
+                var clicked_field = this.name;
+                var clicked_name = this.value;
+                var clicked_value = $(this).prop('value');
+                $("#" + clicked_field).append('<div class="col-xs-12 padding_fix about-div text-center" id="' + clicked_field + '_' + clicked_value + '">'+
+                    '                                <input class="dark-input" type="text" name="' + clicked_name + '[' + clicked_field + '][keys][]" value="New key">'+
+                    '                                <input class="dark-input" type="text" name="' + clicked_name + '[' + clicked_field + '][values][]" value="New value">'+
+                    '                                <i class="fa fa-times input-remover" id="input_remover"></i>'+
+                    '                            </div>');
+            });
+
+            $(document).on('click',"button[id ^= 'add_new']", function(event) {
+                var clicked_field = this.name; //main
+                var clicked_value = $(this).prop('value'); //2
+                this.value = parseInt($(this).prop('value')) + 1;
+                $("#" + clicked_field + "_list").append('<div class="col-xs-12 text-center ' + clicked_field + '_field" id="' + clicked_field + '_inputs' + clicked_value + '">'+
+                    '                        <h4 class="col-xs-12 text-center">' + clicked_field + ' field ' + clicked_value + '</h4>'+
+                    '                        <button type="button" class="btn btn-new" id="add_values_' + clicked_field + '" name="' + clicked_field + '_inputs' + clicked_value + '" value="' + clicked_field + '">Add new values</button>'+
+                    '                        <i class="fa fa-times input-remover" id="field_remover"></i></div>');
+            });
+
+
+
+            $(document).on('click', '#field_remover', function() {
+               $(this).parent().remove();
             });
 
             $(document).on('click', '#input_remover' ,function() {

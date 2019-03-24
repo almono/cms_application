@@ -461,7 +461,7 @@ a.article:hover {
 
 .about-div {
     margin-top: 5px;
-    margin-bottom: 5px;
+    margin-bottom: 0px;
 }
 
 .dark-input {
